@@ -1,5 +1,5 @@
-export interface IButtonProps {
+import { TouchableOpacityProps } from "react-native";
+
+export type IButtonProps = TouchableOpacityProps & {
     title: string;
-    onPress?: () => void;
-    activeOpacity?: number;
 }
