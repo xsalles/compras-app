@@ -14,6 +14,6 @@ export const styles = StyleSheet.create({
     text: {
         color: COLORS.white,
         fontSize: 14,
-        fontWeight: 'semibold'
+        fontWeight: 600
     }
 })
