@@ -25,5 +25,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
     marginTop: 42
+  },
+  content: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: COLORS.background.elevated,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    paddingVertical: 32,
+    paddingHorizontal: 24,
   }
 });

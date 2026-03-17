@@ -1,4 +1,4 @@
-import { Image, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { styles } from "@/app/Home/styles";
 import Button from "@/components/Button";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,7 +14,10 @@ export function Home() {
           <Input placeholder="O que você precisa comprar?" />
           <Button title="Adicionar" />
         </View>
+      </View>
 
+      <View style={styles.content}>
+        <Text>Lista de compras</Text>
       </View>
     </SafeAreaView>
   );
