@@ -1,5 +1,5 @@
 import { TouchableOpacity, Text } from "react-native";
-import { IButtonProps } from "@/interfaces/components/Button";
+import { IButtonProps } from "@/types/components/Button";
 import { styles } from "./styles";
 
 export default function Button({ title, ...rest }: IButtonProps) {
