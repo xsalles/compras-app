@@ -10,8 +10,11 @@ export function Home() {
       <View style={styles.headerContent}>
         <Image source={require("@/assets/icon.png")} style={styles.logo} />
 
-        <Input placeholder="O que você precisa comprar?" />
-        <Button title="Adicionar" />
+        <View style={styles.form}>
+          <Input placeholder="O que você precisa comprar?" />
+          <Button title="Adicionar" />
+        </View>
+
       </View>
     </SafeAreaView>
   );
