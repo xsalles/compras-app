@@ -1,0 +1,21 @@
+import { Image, View } from 'react-native';
+import { styles } from '@/app/Home/styles';
+import Button from '@/components/Button';
+
+export function Home() {
+  return (
+    <View style={styles.container}>
+      <View style={styles.headerContent}>
+        <Image
+          source={require('@/assets/icon.png')}
+          style={styles.logo}
+        />
+
+        <Button title='Adicionar' />
+
+      </View>
+    </View>
+  );
+}
+
+
