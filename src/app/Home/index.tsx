@@ -1,10 +1,12 @@
 import { Image, View } from 'react-native';
 import { styles } from '@/app/Home/styles';
 import Button from '@/components/Button';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 export function Home() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.headerContent}>
         <Image
           source={require('@/assets/icon.png')}
@@ -14,7 +16,7 @@ export function Home() {
         <Button title='Adicionar' />
 
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
