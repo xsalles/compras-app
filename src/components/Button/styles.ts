@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         backgroundColor: COLORS.accentBrand,
-        color: COLORS.white,
+        color: COLORS.background.primary,
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         borderRadius: 8
     },
     text: {
-        color: COLORS.white,
+        color: COLORS.text.light,
         fontSize: 14,
         fontWeight: 600
     }
