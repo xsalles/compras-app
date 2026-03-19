@@ -4,12 +4,13 @@ import { MaterialIcons } from "@expo/vector-icons";
 export default function StatusIcon({
   statusSelected,
   ownStatus,
-}: 
-   StatusIconProps
-) {
-    const isSelected = statusSelected === ownStatus && ownStatus !== "Nenhum";
+}: StatusIconProps) {
+  const isSelected = statusSelected === ownStatus && ownStatus !== "Nenhum";
 
-  return  (
-    <MaterialIcons name={isSelected ? "radio-button-checked" : "radio-button-unchecked"} size={24} />
-  )
+  return (
+    <MaterialIcons
+      name={isSelected ? "radio-button-checked" : "radio-button-unchecked"}
+      size={24}
+    />
+  );
 }

@@ -4,7 +4,11 @@ import { styles } from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import StatusIcon from "../StatusIcon";
 
-export default function Filter({ statusSelected, onPress, ...rest }: IFilterProps) {
+export default function Filter({
+  statusSelected,
+  onPress,
+  ...rest
+}: IFilterProps) {
   return (
     <View style={styles.containerFilters}>
       <TouchableOpacity
@@ -15,7 +19,10 @@ export default function Filter({ statusSelected, onPress, ...rest }: IFilterProp
             : styles.filterUnselected
         }
       >
-          <StatusIcon statusSelected={statusSelected} ownStatus={FilterStatus.PENDING} />
+        <StatusIcon
+          statusSelected={statusSelected}
+          ownStatus={FilterStatus.PENDING}
+        />
         <Text
           style={
             statusSelected === FilterStatus.PENDING
@@ -35,7 +42,10 @@ export default function Filter({ statusSelected, onPress, ...rest }: IFilterProp
         }
         onPress={() => onPress(FilterStatus.BOUGHTS)}
       >
-          <StatusIcon statusSelected={statusSelected} ownStatus={FilterStatus.BOUGHTS} />
+        <StatusIcon
+          statusSelected={statusSelected}
+          ownStatus={FilterStatus.BOUGHTS}
+        />
         <Text
           style={
             statusSelected === FilterStatus.BOUGHTS
@@ -47,7 +57,7 @@ export default function Filter({ statusSelected, onPress, ...rest }: IFilterProp
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity  onPress={() => onPress(FilterStatus.NONE)}>
+      <TouchableOpacity onPress={() => onPress(FilterStatus.NONE)}>
         <Text style={styles.text}>Limpar</Text>
       </TouchableOpacity>
     </View>

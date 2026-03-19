@@ -6,6 +6,7 @@
   import Filter from "@/components/Filter";
   import { FilterStatus } from "@/types/components/Filter/index";
   import { useState } from "react";
+import Item from "@/components/Item";
 
   export function Home() {
     const [statusSelected, setStatusSelected] = useState<FilterStatus>(FilterStatus.PENDING);
@@ -23,7 +24,14 @@
 
         <View style={styles.content}>
           <Filter statusSelected={statusSelected} onPress={(status: FilterStatus) => setStatusSelected(status)} />
+
+          <Item name="Banana" ownStatus={FilterStatus.PENDING} statusSelected={statusSelected} />
+          <Item name="Maçã" ownStatus={FilterStatus.BOUGHTS} statusSelected={statusSelected} />
+          <Item name="Pão" ownStatus={FilterStatus.PENDING} statusSelected={statusSelected} />
+          <Item name="Leite" ownStatus={FilterStatus.BOUGHTS} statusSelected={statusSelected} />
         </View>
+
+        
       </SafeAreaView>
     );
   }

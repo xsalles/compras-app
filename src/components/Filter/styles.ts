@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: COLORS.border.primary,
         paddingBottom: 16,
-        marginBottom: 16
     },
     filterUnselected: {
         flexDirection: 'row',
