@@ -6,16 +6,14 @@ import { MaterialIcons } from "@expo/vector-icons";
 export default function Filter({ statusSelected, onPress, ...rest }: IFilterProps) {
   return (
     <View style={styles.containerFilters}>
-      <View
+      <TouchableOpacity
+        onPress={() => onPress(FilterStatus.PENDING)}
         style={
           statusSelected === FilterStatus.PENDING
             ? styles.filter
             : styles.filterUnselected
         }
       >
-        <TouchableOpacity 
-        onPress={() => onPress(FilterStatus.PENDING)}
-        >
           <MaterialIcons
             name={
               statusSelected === FilterStatus.PENDING
@@ -24,7 +22,6 @@ export default function Filter({ statusSelected, onPress, ...rest }: IFilterProp
             }
             size={24}
           />
-        </TouchableOpacity>
         <Text
           style={
             statusSelected === FilterStatus.PENDING
@@ -34,16 +31,16 @@ export default function Filter({ statusSelected, onPress, ...rest }: IFilterProp
         >
           Pendente
         </Text>
-      </View>
+      </TouchableOpacity>
 
-      <View
+      <TouchableOpacity
         style={
           statusSelected === FilterStatus.BOUGHTS
             ? styles.filter
             : styles.filterUnselected
         }
+        onPress={() => onPress(FilterStatus.BOUGHTS)}
       >
-        <TouchableOpacity onPress={() => onPress(FilterStatus.BOUGHTS)}>
           <MaterialIcons
             name={
               statusSelected === FilterStatus.BOUGHTS
@@ -52,7 +49,6 @@ export default function Filter({ statusSelected, onPress, ...rest }: IFilterProp
             }
             size={24}
           />
-        </TouchableOpacity>
         <Text
           style={
             statusSelected === FilterStatus.BOUGHTS
@@ -62,7 +58,7 @@ export default function Filter({ statusSelected, onPress, ...rest }: IFilterProp
         >
           Comprados
         </Text>
-      </View>
+      </TouchableOpacity>
 
       <TouchableOpacity  onPress={() => onPress(FilterStatus.NONE)}>
         <Text style={styles.text}>Limpar</Text>
