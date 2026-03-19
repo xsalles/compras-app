@@ -2,6 +2,7 @@ import { FilterStatus, IFilterProps } from "@/types/components/Filter";
 import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { MaterialIcons } from "@expo/vector-icons";
+import StatusIcon from "../StatusIcon";
 
 export default function Filter({ statusSelected, onPress, ...rest }: IFilterProps) {
   return (
@@ -14,14 +15,7 @@ export default function Filter({ statusSelected, onPress, ...rest }: IFilterProp
             : styles.filterUnselected
         }
       >
-          <MaterialIcons
-            name={
-              statusSelected === FilterStatus.PENDING
-                ? "radio-button-checked"
-                : "radio-button-unchecked"
-            }
-            size={24}
-          />
+          <StatusIcon statusSelected={statusSelected} ownStatus={FilterStatus.PENDING} />
         <Text
           style={
             statusSelected === FilterStatus.PENDING
@@ -41,14 +35,7 @@ export default function Filter({ statusSelected, onPress, ...rest }: IFilterProp
         }
         onPress={() => onPress(FilterStatus.BOUGHTS)}
       >
-          <MaterialIcons
-            name={
-              statusSelected === FilterStatus.BOUGHTS
-                ? "radio-button-checked"
-                : "radio-button-unchecked"
-            }
-            size={24}
-          />
+          <StatusIcon statusSelected={statusSelected} ownStatus={FilterStatus.BOUGHTS} />
         <Text
           style={
             statusSelected === FilterStatus.BOUGHTS
