@@ -64,7 +64,9 @@ export default function Filter({ statusSelected, onPress, ...rest }: IFilterProp
         </Text>
       </View>
 
-      <Text style={styles.text}>Limpar</Text>
+      <TouchableOpacity  onPress={() => onPress(FilterStatus.NONE)}>
+        <Text style={styles.text}>Limpar</Text>
+      </TouchableOpacity>
     </View>
   );
 }

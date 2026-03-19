@@ -8,7 +8,11 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 12,
         width: '100%',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.border.primary,
+        paddingBottom: 16,
+        marginBottom: 16
     },
     filterUnselected: {
         flexDirection: 'row',
