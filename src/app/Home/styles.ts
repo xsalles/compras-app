@@ -28,11 +28,18 @@ export const styles = StyleSheet.create({
   },
   content: {
     width: '100%',
-    height: '100%',
+    flex: 1,
     backgroundColor: COLORS.background.elevated,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     paddingVertical: 32,
     paddingHorizontal: 24,
+  },
+  textEmptyList: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: COLORS.text.muted,
+    marginTop: 32,
+    alignSelf: 'center',
   }
 });
