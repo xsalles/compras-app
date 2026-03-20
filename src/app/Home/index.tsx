@@ -1,4 +1,4 @@
-import { FlatList, Image, Text, View } from "react-native";
+import { Alert, FlatList, Image, Text, View } from "react-native";
 import { styles } from "@/app/Home/styles";
 import Button from "@/components/Button";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -90,15 +90,18 @@ export function Home() {
   const filteredItems = itemsList.filter((item) => item.ownStatus === filter);
 
   function handleAddItem() {
-    setItemsList((prevState) => {
-      const newItem: ItemProps = {
-        id: prevState.length + 1,
+    if (!nameItem.trim()) {
+      return Alert.alert("Atenção", "O nome do item não pode ser vazio.");
+    }
+
+    const newItem: ItemProps = {
+        id: itemsList.length + 1,
         name: nameItem,
         ownStatus: FilterStatus.PENDING,
         statusSelected: filter,
       };
-      return [...prevState, newItem];
-    });
+
+    setItemsList([...itemsList, newItem]);
   }
 
 
