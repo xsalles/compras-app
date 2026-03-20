@@ -79,11 +79,11 @@ const items: ItemProps[] = [
 ];
 
 export function Home() {
-  const [statusSelected, setStatusSelected] = useState<FilterStatus>(
+  const [filter, setFilter] = useState<FilterStatus>(
     FilterStatus.PENDING,
   );
 
-  const filteredItems = items.filter((item) => item.ownStatus === statusSelected);
+  const filteredItems = items.filter((item) => item.ownStatus === filter);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -98,8 +98,8 @@ export function Home() {
 
       <View style={styles.content}>
         <Filter
-          statusSelected={statusSelected}
-          onPress={(status: FilterStatus) => setStatusSelected(status)}
+          statusSelected={filter}
+          onPress={(status: FilterStatus) => setFilter(status)}
         />
 
         <FlatList
@@ -110,7 +110,7 @@ export function Home() {
               id={item.id}
               name={item.name}
               ownStatus={item.ownStatus}
-              statusSelected={statusSelected}
+              statusSelected={filter}
             />
           )}
           showsVerticalScrollIndicator={false}
