@@ -18,3 +18,19 @@ export async function getAllItems(): Promise<ItemStorageProps[]> {
         throw new Error("Não foi possível carregar os itens.");
     }
 }
+
+export async function saveItem(item: ItemStorageProps): Promise<void> {
+    try {
+        const items = await getAllItems();
+
+        const newItem = {
+            id: items.length + 1,
+            name: item.name,
+            status: item.status,
+        }
+
+        await AsyncStorage.setItem(ITEMS_KEY, JSON.stringify([...items, newItem]));
+    } catch (error) {
+        throw new Error("Não foi possível salvar o item.");
+    }
+}
