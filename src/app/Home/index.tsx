@@ -83,7 +83,24 @@ export function Home() {
     FilterStatus.PENDING,
   );
 
-  const filteredItems = items.filter((item) => item.ownStatus === filter);
+  const [nameItem, setNameItem] = useState<string>("");
+
+  const [itemsList, setItemsList] = useState<ItemProps[]>(items);
+
+  const filteredItems = itemsList.filter((item) => item.ownStatus === filter);
+
+  function handleAddItem() {
+    setItemsList((prevState) => {
+      const newItem: ItemProps = {
+        id: prevState.length + 1,
+        name: nameItem,
+        ownStatus: FilterStatus.PENDING,
+        statusSelected: filter,
+      };
+      return [...prevState, newItem];
+    });
+  }
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -91,8 +108,10 @@ export function Home() {
         <Image source={require("@/assets/icon.png")} style={styles.logo} />
 
         <View style={styles.form}>
-          <Input placeholder="O que você precisa comprar?" />
-          <Button title="Adicionar" />
+          <Input placeholder="O que você precisa comprar?" onChangeText={(value) => setNameItem(value)} />
+          <Button title="Adicionar" onPress={() => 
+handleAddItem()
+          } />
         </View>
       </View>
 
