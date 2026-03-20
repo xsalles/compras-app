@@ -8,101 +8,20 @@ import { FilterStatus } from "@/types/components/Filter/index";
 import { useState } from "react";
 import Item from "@/components/Item";
 import { ItemProps } from "@/types/components/Item";
-
-const items: ItemProps[] = [
-  {
-    id: 1,
-    name: "Item 1",
-    ownStatus: FilterStatus.PENDING,
-    statusSelected: FilterStatus.PENDING,
-  },
-  {
-    id: 2,
-    name: "Item 2",
-    ownStatus: FilterStatus.BOUGHTS,
-    statusSelected: FilterStatus.PENDING,
-  },
-  {
-    id: 3,
-    name: "Item 3",
-    ownStatus: FilterStatus.PENDING,
-    statusSelected: FilterStatus.BOUGHTS,
-  },
-  {
-    id: 4,
-    name: "Item 4",
-    ownStatus: FilterStatus.BOUGHTS,
-    statusSelected: FilterStatus.BOUGHTS,
-  },
-  {
-    id: 5,
-    name: "Item 5",
-    ownStatus: FilterStatus.PENDING,
-    statusSelected: FilterStatus.PENDING,
-  },
-  {
-    id: 6,
-    name: "Item 6",
-    ownStatus: FilterStatus.BOUGHTS,
-    statusSelected: FilterStatus.PENDING,
-  },
-  {
-    id: 7,
-    name: "Item 7",
-    ownStatus: FilterStatus.PENDING,
-    statusSelected: FilterStatus.BOUGHTS,
-  },
-  {
-    id: 8,
-    name: "Item 8",
-    ownStatus: FilterStatus.PENDING,
-    statusSelected: FilterStatus.BOUGHTS,
-  },
-  {
-    id: 9,
-    name: "Item 9",
-    ownStatus: FilterStatus.PENDING,
-    statusSelected: FilterStatus.BOUGHTS,
-  },
-  {
-    id: 10,
-    name: "Item 10",
-    ownStatus: FilterStatus.PENDING,
-    statusSelected: FilterStatus.BOUGHTS,
-  },
-  {
-    id: 11,
-    name: "Item 11",
-    ownStatus: FilterStatus.PENDING,
-    statusSelected: FilterStatus.BOUGHTS,
-  },
-];
+import { getAllItems, ItemStorageProps } from "@/storage/itemsStorage";
 
 export function Home() {
   const [filter, setFilter] = useState<FilterStatus>(
     FilterStatus.PENDING,
   );
 
-  const [nameItem, setNameItem] = useState<string>("");
+  const [itemsList, setItemsList] = useState<ItemStorageProps[]>([]);
 
-  const [itemsList, setItemsList] = useState<ItemProps[]>(items);
+  useState(async () => {
+    setItemsList(await getAllItems());
+  });
 
-  const filteredItems = itemsList.filter((item) => item.ownStatus === filter);
-
-  function handleAddItem() {
-    if (!nameItem.trim()) {
-      return Alert.alert("Atenção", "O nome do item não pode ser vazio.");
-    }
-
-    const newItem: ItemProps = {
-        id: itemsList.length + 1,
-        name: nameItem,
-        ownStatus: FilterStatus.PENDING,
-        statusSelected: filter,
-      };
-
-    setItemsList([...itemsList, newItem]);
-  }
+  const filteredItems = itemsList.filter((item) => item.status === filter);
 
 
   return (
