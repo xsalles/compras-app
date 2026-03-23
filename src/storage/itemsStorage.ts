@@ -42,5 +42,5 @@ export async function getByStatus(status: FilterStatus): Promise<ItemStorageProp
         return items.filter((item) => item.status === status);
     } catch (error) {
         throw new Error("Não foi possível carregar os itens.");
-    }
+    }''
 }

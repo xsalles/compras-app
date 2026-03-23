@@ -17,16 +17,16 @@ export function Home() {
   const [itemsList, setItemsList] = useState<ItemStorageProps[]>([]);
   const [itemName, setItemName] = useState("");
 
+  
+  const filteredItems = itemsList.filter((item) => item.status === filter);
+  
   useEffect(() => {
     const loadItems = async () => {
       await setItemsList(await getAllItems());
     }
 
     loadItems();
-  }, []);
-
-  const filteredItems = itemsList.filter((item) => item.status === filter);
-
+  }, [itemsList, filter]);
 
   return (
     <SafeAreaView style={styles.container}>
