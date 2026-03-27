@@ -49,7 +49,7 @@ export async function removeItem(id: number): Promise<void> {
   try {
     const items = await getAllItems();
 
-    const filteredItem = items.filter((item) => item.id === id);
+    const filteredItem = items.filter((item) => item.id !== id);
     
     await AsyncStorage.setItem(ITEMS_KEY, JSON.stringify(filteredItem));
   } catch (error) {

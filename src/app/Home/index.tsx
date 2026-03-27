@@ -60,7 +60,7 @@ export function Home() {
               name={item.name}
               ownStatus={item.status}
               statusSelected={filter}
-              onRemove={removeItem}
+              onRemove={() => removeItem(item.id)}
             />
           )}
           showsVerticalScrollIndicator={false}
