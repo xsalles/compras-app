@@ -15,7 +15,11 @@ export default function Item({ ...props }: ItemProps) {
         <Text style={styles.nameItem}>{props.name}</Text>
       </View>
       <TouchableOpacity>
-        <MaterialIcons name="delete" size={24} />
+          <MaterialIcons
+            name="delete"
+            size={24}
+            onPress={() => props.onRemove?.(props.id)}
+          />
       </TouchableOpacity>
     </View>
   );

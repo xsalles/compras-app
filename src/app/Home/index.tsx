@@ -7,7 +7,7 @@ import Filter from "@/components/Filter";
 import { FilterStatus } from "@/types/components/Filter/index";
 import { useEffect, useState } from "react";
 import Item from "@/components/Item";
-import { getAllItems, ItemStorageProps, saveItem } from "@/storage/itemsStorage";
+import { getAllItems, ItemStorageProps, removeItem, saveItem } from "@/storage/itemsStorage";
 
 export function Home() {
   const [filter, setFilter] = useState<FilterStatus>(
@@ -60,6 +60,7 @@ export function Home() {
               name={item.name}
               ownStatus={item.status}
               statusSelected={filter}
+              onRemove={removeItem}
             />
           )}
           showsVerticalScrollIndicator={false}
