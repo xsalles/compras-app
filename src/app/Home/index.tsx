@@ -10,6 +10,7 @@ import Item from "@/components/Item";
 import {
   getAllItems,
   ItemStorageProps,
+  removeAllItems,
   removeItem,
   saveItem,
   updateItemStatus,
@@ -40,6 +41,41 @@ export function Home() {
     setItemsList(await getAllItems());
   };
 
+  const handleAddItem = async () => {
+    const name = itemName.trim();
+    if (!name) return;
+
+    const nextId =
+      itemsList.length === 0
+        ? 1
+        : Math.max(...itemsList.map((item) => item.id)) + 1;
+
+    await saveItem({
+      id: nextId,
+      name,
+      status: FilterStatus.PENDING,
+    });
+
+    setItemName("");
+    setFilter(FilterStatus.PENDING);
+    await loadItems();
+  };
+
+  const handleRemoveAllItems = async () => {
+    await removeAllItems();
+    setItemsList([]);
+    setFilter(FilterStatus.PENDING);
+  };
+
+  const handleChangeFilter = async (status: FilterStatus) => {
+    if (status === FilterStatus.NONE) {
+      await handleRemoveAllItems();
+      return;
+    }
+
+    setFilter(status);
+  };
+
 
   const handleRemoveItem = async (id: number) => {
     await removeItem(id);
@@ -57,15 +93,19 @@ export function Home() {
         <Image source={require("@/assets/icon.png")} style={styles.logo} />
 
         <View style={styles.form}>
-          <Input placeholder="O que você precisa comprar?" onChangeText={(value) => setItemName(value)} />
-          <Button title="Adicionar" onPress={() => saveItem({ id: itemsList.length + 1, name: itemName, status: FilterStatus.PENDING })} />
+          <Input
+            placeholder="O que você precisa comprar?"
+            value={itemName}
+            onChangeText={(value) => setItemName(value)}
+          />
+          <Button title="Adicionar" onPress={handleAddItem} />
         </View>
       </View>
 
       <View style={styles.content}>
         <Filter
           statusSelected={filter}
-          onPress={(status: FilterStatus) => setFilter(status)}
+          onPress={(status: FilterStatus) => handleChangeFilter(status)}
         />
 
         <FlatList

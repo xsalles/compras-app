@@ -44,8 +44,7 @@ export async function getByStatus(
     return items.filter((item) => item.status === status);
   } catch (error) {
     throw new Error("Não foi possível carregar os itens.");
-    }
-  ("");
+  }
 }
 
 export async function removeItem(id: number): Promise<void> {
@@ -57,6 +56,14 @@ export async function removeItem(id: number): Promise<void> {
     await AsyncStorage.setItem(ITEMS_KEY, JSON.stringify(filteredItem));
   } catch (error) {
     throw new Error("Não foi possível remover o item.");
+  }
+}
+
+export async function removeAllItems(): Promise<void> {
+  try {
+    await AsyncStorage.setItem(ITEMS_KEY, JSON.stringify([]));
+  } catch (error) {
+    throw new Error("Não foi possível remover todos os items.");
   }
 }
 
