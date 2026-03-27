@@ -1,4 +1,4 @@
-import { FlatList, Image, Text, View } from "react-native";
+import { Alert, FlatList, Image, Text, View } from "react-native";
 import { styles } from "@/app/Home/styles";
 import Button from "@/components/Button";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -59,6 +59,8 @@ export function Home() {
     setItemName("");
     setFilter(FilterStatus.PENDING);
     await loadItems();
+
+    Alert.alert("Sucesso", "Item adicionado com sucesso!");
   };
 
   const handleRemoveAllItems = async () => {
