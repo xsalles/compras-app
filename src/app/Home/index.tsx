@@ -64,9 +64,26 @@ export function Home() {
   };
 
   const handleRemoveAllItems = async () => {
-    await removeAllItems();
-    setItemsList([]);
-    setFilter(FilterStatus.PENDING);
+    Alert.alert(
+      "Confirmação",
+      "Tem certeza que deseja remover todos os itens?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Remover",
+          style: "destructive",
+          onPress: async () => {
+            await removeAllItems();
+            setItemsList([]);
+            setFilter(FilterStatus.PENDING);
+          },
+        },
+      ],
+      { cancelable: true }
+    )
   };
 
   const handleChangeFilter = async (status: FilterStatus) => {
