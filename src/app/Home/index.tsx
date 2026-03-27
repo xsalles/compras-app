@@ -7,7 +7,13 @@ import Filter from "@/components/Filter";
 import { FilterStatus } from "@/types/components/Filter/index";
 import { useEffect, useState } from "react";
 import Item from "@/components/Item";
-import { getAllItems, ItemStorageProps, removeItem, saveItem } from "@/storage/itemsStorage";
+import {
+  getAllItems,
+  ItemStorageProps,
+  removeItem,
+  saveItem,
+  updateItemStatus,
+} from "@/storage/itemsStorage";
 
 export function Home() {
   const [filter, setFilter] = useState<FilterStatus>(
@@ -17,16 +23,33 @@ export function Home() {
   const [itemsList, setItemsList] = useState<ItemStorageProps[]>([]);
   const [itemName, setItemName] = useState("");
 
-  
-  const filteredItems = itemsList.filter((item) => item.status === filter);
+  const filteredItems =
+    filter === FilterStatus.NONE
+      ? itemsList
+      : itemsList.filter((item) => item.status === filter);
   
   useEffect(() => {
     const loadItems = async () => {
-      await setItemsList(await getAllItems());
-    }
+      setItemsList(await getAllItems());
+    };
 
     loadItems();
-  }, [itemsList, filter]);
+  }, []);
+
+  const loadItems = async () => {
+    setItemsList(await getAllItems());
+  };
+
+
+  const handleRemoveItem = async (id: number) => {
+    await removeItem(id);
+    await loadItems();
+  };
+
+  const handleChangeItemStatus = async (id: number, status: FilterStatus) => {
+    await updateItemStatus(id, status);
+    await loadItems();
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,13 +58,7 @@ export function Home() {
 
         <View style={styles.form}>
           <Input placeholder="O que você precisa comprar?" onChangeText={(value) => setItemName(value)} />
-          <Button title="Adicionar" onPress={() => 
-            saveItem({
-              id: itemsList.length + 1,
-              name: itemName,
-              status: FilterStatus.PENDING,
-            })
-          } />
+          <Button title="Adicionar" onPress={() => saveItem({ id: itemsList.length + 1, name: itemName, status: FilterStatus.PENDING })} />
         </View>
       </View>
 
@@ -60,7 +77,8 @@ export function Home() {
               name={item.name}
               ownStatus={item.status}
               statusSelected={filter}
-              onRemove={() => removeItem(item.id)}
+              onRemove={handleRemoveItem}
+              onChangeStatus={(status) => handleChangeItemStatus(item.id, status)}
             />
           )}
           showsVerticalScrollIndicator={false}

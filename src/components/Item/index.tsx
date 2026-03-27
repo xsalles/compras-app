@@ -9,17 +9,14 @@ export default function Item({ ...props }: ItemProps) {
     <View style={styles.container}>
       <View style={styles.containerInfo}>
         <StatusIcon
+          onChangeStatus={props.onChangeStatus}
           ownStatus={props.ownStatus}
           statusSelected={props.statusSelected}
         />
         <Text style={styles.nameItem}>{props.name}</Text>
       </View>
-      <TouchableOpacity>
-          <MaterialIcons
-            name="delete"
-            size={24}
-            onPress={() => props.onRemove?.(props.id)}
-          />
+      <TouchableOpacity onPress={() => props.onRemove?.(props.id)}>
+        <MaterialIcons name="delete" size={24} />
       </TouchableOpacity>
     </View>
   );

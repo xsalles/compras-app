@@ -23,8 +23,8 @@ export async function saveItem(item: ItemStorageProps): Promise<void> {
   try {
     const items = await getAllItems();
 
-    const newItem = {
-      id: items.length + 1,
+    const newItem: ItemStorageProps = {
+      id: item.id,
       name: item.name,
       status: item.status,
     };
@@ -35,14 +35,17 @@ export async function saveItem(item: ItemStorageProps): Promise<void> {
   }
 }
 
-export async function getByStatus(status: FilterStatus): Promise<ItemStorageProps[]> {
-    try {
-        const items = await getAllItems();
+export async function getByStatus(
+  status: FilterStatus,
+): Promise<ItemStorageProps[]> {
+  try {
+    const items = await getAllItems();
 
-        return items.filter((item) => item.status === status);
-    } catch (error) {
-        throw new Error("Não foi possível carregar os itens.");
-    }''
+    return items.filter((item) => item.status === status);
+  } catch (error) {
+    throw new Error("Não foi possível carregar os itens.");
+    }
+  ("");
 }
 
 export async function removeItem(id: number): Promise<void> {
@@ -50,9 +53,32 @@ export async function removeItem(id: number): Promise<void> {
     const items = await getAllItems();
 
     const filteredItem = items.filter((item) => item.id !== id);
-    
+
     await AsyncStorage.setItem(ITEMS_KEY, JSON.stringify(filteredItem));
   } catch (error) {
     throw new Error("Não foi possível remover o item.");
+  }
+}
+
+export async function updateItemStatus(
+  id: number,
+  status: FilterStatus,
+): Promise<void> {
+  try {
+    const items = await getAllItems();
+
+    const updatedItems = items.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          status,
+        }
+      }
+      return item;
+    });
+
+    await AsyncStorage.setItem(ITEMS_KEY, JSON.stringify(updatedItems));
+  } catch (error) {
+    throw new Error("Não foi possível atualizar o status do item.");
   }
 }
